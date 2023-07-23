@@ -37,12 +37,12 @@ class PembayaranController extends Controller
         $pembelian->no_hp = $request->no;
         $pembelian->jumlah = $request->jumlah;
         $pembelian->metode = $request->metode;
-        $pembelian->status = "Belum di bayar";
+        $pembelian->statuse_id = 1;
         $pembelian->user_id = $request->iduser;
         $pembelian->product_id = $id;
         $pembelian->save();
 
-        return redirect()->route('product.index');
+        return redirect()->route('history');
 
 
     }

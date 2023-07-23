@@ -7,7 +7,7 @@
         <p class="h4 fw-normal ">Temukan beragam pilihan furniture berkualitasuntuk melengkapi ruang kesayangan Anda.
         </p>
         <a class=" shadow icon-link mt-2 px-5 bg-primary py-2 rounded link-light link-offset-2 link-underline-opacity-25 text-decoration-none h4 fw-medium link-offset-2"
-            href="{{ route('product.index') }}">
+            href="{{ route('catalog') }}">
             Temukan Sekarang<i class="bi bi-search"></i>
         </a>
     </div>

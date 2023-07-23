@@ -12,7 +12,7 @@
                         <p class="card-text mb-0">Harga</p>
                         <p class="mt-0 h4 fw-medium">{{ $Product->harga }}</p>
                         <div class=" d-flex justify-content-center mt-4">
-                            <a href="{{ route('product.show', ['product' => $Product->id]) }}" class="btn btn-primary px-5">Beli</a>
+                            <a href="{{ route('detailproduct', [$Product->id]) }}" class="btn btn-primary px-5">Beli</a>
                         </div>
                     </div>
             </div>

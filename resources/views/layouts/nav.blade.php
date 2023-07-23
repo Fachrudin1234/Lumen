@@ -13,7 +13,7 @@ $currentRouteName = Route::currentRouteName();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav h5 ">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('product.index') }}">Produk</a>
+                    <a class="nav-link text-white" href="{{ route('catalog') }}">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Tentang Kami</a>
@@ -47,7 +47,9 @@ $currentRouteName = Route::currentRouteName();
                                                     document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-
+                        <a class="dropdown-item" href="{{ route('history') }}">
+                            {{ __('history') }}
+                        </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
