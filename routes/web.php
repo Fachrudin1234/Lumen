@@ -29,3 +29,5 @@ Route::get('/beli/{id}', [PembelianController::class, 'beli'])->name('beli')->mi
 Route::put('/pembayaran/{id}', [PembayaranController::class, 'pembayaran'])->name('pembayaran')->middleware('auth');
 
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+
+

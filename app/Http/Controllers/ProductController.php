@@ -16,12 +16,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $pageTitle = 'Product';
+        $pageTitle = 'Produk';
 
-        $Products = Product::all();
-        return view('product', [
-        'pageTitle' => $pageTitle,
-        'Products' => $Products
+        return view('admin.produk', [
+        'pageTitle' => $pageTitle
     ]);
 
     }
@@ -69,7 +67,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id )
     {
-        
+
     }
 
     /**
