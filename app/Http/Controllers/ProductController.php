@@ -16,16 +16,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $pageTitle = 'Product';
 
-        $Products = Product::all();
-        return view('product', [
-        'pageTitle' => $pageTitle,
-        'Products' => $Products
-    ]);
 
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -47,13 +40,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $pageTitle = 'Product';
-        $Products = Product::find($id);
 
-        return view('show', [
-        'pageTitle' => $pageTitle,
-        'Products' => $Products
-    ]);
     }
 
     /**
@@ -69,7 +56,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id )
     {
-        
+
     }
 
     /**

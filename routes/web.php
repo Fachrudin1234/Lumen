@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\StorebeliController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\HistoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +22,10 @@ use App\Http\Controllers\StorebeliController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('product', ProductController::class);
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
-
+Route::get('/catalog', [CatalogController::class, 'catalog'])->name('catalog');
+Route::get('/detailproduct/{id}', [StorebeliController::class, 'detailproduct'])->name('detailproduct')->middleware('auth');
 Route::get('/beli/{id}', [PembelianController::class, 'beli'])->name('beli')->middleware('auth');
-
 Route::put('/pembayaran/{id}', [PembayaranController::class, 'pembayaran'])->name('pembayaran')->middleware('auth');
+Route::get('/history', [HistoryController::class, 'history'])->name('history')->middleware('auth');
+

@@ -8,17 +8,16 @@ use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-class StorebeliController extends Controller
+class CatalogController extends Controller
 {
-    public function detailproduct(string $id)
+    public function catalog()
     {
         $pageTitle = 'Product';
-        $Products = Product::find($id);
-
-        return view('show', [
+        $Products = Product::all();
+        return view('product', [
         'pageTitle' => $pageTitle,
         'Products' => $Products
     ]);
-    }
 
+    }
 }
