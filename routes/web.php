@@ -7,6 +7,7 @@ use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\StorebeliController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +30,14 @@ Route::get('/beli/{id}', [PembelianController::class, 'beli'])->name('beli')->mi
 Route::put('/pembayaran/{id}', [PembayaranController::class, 'pembayaran'])->name('pembayaran')->middleware('auth');
 
 Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
+
+Route::resource('users', UserController::class);
+
+// Route untuk menampilkan form edit user
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+// Route untuk mengupdate data user
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
