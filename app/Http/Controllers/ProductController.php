@@ -8,7 +8,7 @@ use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     /**
@@ -17,21 +17,21 @@ class ProductController extends Controller
     public function index()
     {
         $pageTitle = 'Product';
-
         $Products = Product::all();
-        return view('product', [
+        return view('admin.product', [
         'pageTitle' => $pageTitle,
         'Products' => $Products
     ]);
 
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $pageTitle = 'Tambah Product';
 
+        return view('admin.add', ['pageTitle' => $pageTitle]);
     }
 
     /**
@@ -39,7 +39,42 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':harus diisi.',
+            'unic' => 'Isi :attribute dengan format yang benar',
+            'numeric' => 'Isi :attribute dengan angka',
+        ];
 
+        $validator = Validator::make($request->all(), [
+            'Nama_Product' => 'required',
+            'Code' => 'required',
+            'Deskripsi' => 'required',
+            'Harga' => 'required|numeric',
+            'Stock' => 'required|numeric',
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $file = $request->file('imgproduct');
+        $originalimagename = $file->getClientOriginalName();
+        $encryptedimagename = $file->hashName();
+        //Store File
+        $file->store('public/files/img');
+
+
+        $Product = New Product;
+        $Product->code_product = $request->Code;
+        $Product->name_product = $request->Nama_Product;
+        $Product->harga = $request->Harga;
+        $Product->stock = $request->Stock;
+        $Product->deskripsi = $request->Deskripsi;
+        $Product->original_imagename = $originalimagename;
+        $Product->encrypted_imagename = $encryptedimagename;
+        $Product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -47,13 +82,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $pageTitle = 'Product';
-        $Products = Product::find($id);
 
-        return view('show', [
-        'pageTitle' => $pageTitle,
-        'Products' => $Products
-    ]);
     }
 
     /**
@@ -69,7 +98,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id )
     {
-        
+
     }
 
     /**
@@ -77,7 +106,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $Product = Product::find($id);
+        Storage::delete('public/files/img/' . $Product->encrypted_imagename);
+        $Product->delete();
+        return redirect()->route('product.index');
     }
 
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('no_hp');
             $table->integer('jumlah');
             $table->string('metode');
-            $table->string('status');
+            $table->foreignId('statuse_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-    Schema::dropIfExists('pembayarans');
+        Schema::dropIfExists('pembayarans');
     }
 };

@@ -4,7 +4,7 @@ $currentRouteName = Route::currentRouteName();
 
 <nav class="navbar navbar-expand-lg bg-black ">
     <div class="container-md">
-        <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ Vite::asset('resources/images/logo.svg') }}"
+        <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ Vite::asset('resources/images/logo.svg') }}"
                 width="115" height="30"></a>
         <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,7 +13,7 @@ $currentRouteName = Route::currentRouteName();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav h5 ">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('product.index') }}">Produk</a>
+                    <a class="nav-link text-white" href="{{ route('catalog') }}">Produk</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#">Tentang Kami</a>
@@ -47,7 +47,9 @@ $currentRouteName = Route::currentRouteName();
                                                     document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-
+                        <a class="dropdown-item" href="{{ route('history',[Auth::user()->id]) }}">
+                            {{ __('history') }}
+                        </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
