@@ -19,8 +19,13 @@
                 </li>
                 <li class="list-inline-item">|</li>
                 <li class="list-inline-item">
-                    <a href="{{ route('product.create')}}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-1"></i> Tambah Produk
+                    <a href="{{ route('databayar.exindex') }}" class="btn btn-primary">
+                        <i class="bi bi-check"></i> Cek Expired Trasaksi
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="{{ route('databayar.seindex') }}" class="btn btn-primary">
+                        <i class="bi bi-check"></i> Cek Sukses Trasaksi
                     </a>
                 </li>
             </ul>
@@ -28,20 +33,25 @@
     </div>
     <hr>
     <div class="table-responsive border p-3 rounded-3">
-        <table class="table table-bordered table-hover table-striped mb-0 bg-white datatable" id="produtTB">
+        <table class="table table-bordered table-hover table-striped mb-0 bg-white datatable" id="listpembayaranTable">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>No.</th>
+                    <th>Nama penerima</th>
+                    <th>Alamat</th>
+                    <th>No_hp</th>
+                    <th>Jumlah</th>
+                    <th>Biaya</th>
+                    <th>Metode</th>
+                    <th>Status</th>
                     <th>Code</th>
-                    <th>Name Barang</th>
-                    <th>Harga</th>
-                    <th>Stok</th>
-                    <th>Deskripsi</th>
-                    <th></th>
+                    <th>Nama Pemesan</th>
+                    <th>Verivikasi</th>
                 </tr>
             </thead>
         </table>
     </div>
 </div>
 @endsection
+

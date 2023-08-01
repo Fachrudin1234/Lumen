@@ -4,7 +4,7 @@
 <div class="container-md d-flex justify-content-center mt-5">
     <div class="border border-4 border-black p-5 rounded shadow">
         <div class="d-flex justify-content-center ">
-            <img class="img-fluid me-4" src="formimg.svg" alt="" style="width: 500px;">
+            <img class="img-fluid me-4" src="{{ Vite::asset('public/storage/files/img/'.$Products->encrypted_imagename) }}" alt="" style="max-width: 500px; max-height: 500px;">
             <div class="mt-4">
                 <form action="{{ route('pembayaran', [$Products->id] ) }}" method="POST">
                     @csrf
@@ -50,11 +50,13 @@
                     </div>
                     <select class="form-select mb-0" aria-label="Default select example" name="metode" id="metode"
                         required>
-                        <option selected>Metode Pembayaran</option>
-                        <option value="1">BANK BCA</option>
-                        <option value="2">BANK BRI</option>
-                        <option value="3">BANK BNI</option>
+                        @foreach ($metod as $metode)
+                            <option value="{{ $metode->id }}" {{ old('metode') == $metode-> id ? 'selected' : '' }}>{{ $metode->metod }}</option>
+                        @endforeach
                     </select>
+                    @error('metode')
+                    <div class="text-danger"><small>{{ $message }}</small></div>
+                    @enderror
                     <div class="mx-0 invisible">
                         <input type="text" class="form-control" id="iduser" value="{{ Auth::user()->id }}" required
                             name="iduser">

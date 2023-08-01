@@ -16,7 +16,10 @@ $currentRouteName = Route::currentRouteName();
                     <a class="nav-link text-white" href="{{ route('product.index') }}">list Produk</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">list Pembayar</a>
+                    <a class="nav-link text-white" href="{{ route('databayar.index') }}">list Pembayar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('users.index') }}">list User</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
@@ -29,9 +32,6 @@ $currentRouteName = Route::currentRouteName();
                         <a class="dropdown-item" href="{{ route('logoutadmin') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
-                        </a>
-                        <a class="dropdown-item" href="{{ route('product.create') }}">
-                            {{ __('Tambah Product') }}
                         </a>
                         <form id="logout-form" action="{{ route('logoutadmin') }}" method="POST" class="d-none">
                             @csrf

@@ -25,4 +25,35 @@ class BayarController extends Controller
         'vc' => $vc
     ]);
     }
+
+
+
+    public function uplodbukti(Request $request, string $id)
+    {
+        $messages = [
+            'required' => ':Attribute harus diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'bukti' => 'required',
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $iuser = $request->iduser;
+        $bayar= Pembayaran::find($id);
+        // Hapus file CV lama
+        $file = $request->file('bukti');
+        $originalFilename = $file->getClientOriginalName();
+        $encryptedFilename = $file->hashName();
+        $file->store('public/files/bukti');
+        $bayar->statuse_id = 2;
+        $bayar->original_buktiimage = $originalFilename;
+        $bayar->encrypted_buktiimage = $encryptedFilename;
+        $bayar->save();
+
+        return redirect()->route('history2', [$iuser]);
+    }
+
 }

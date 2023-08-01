@@ -90,7 +90,12 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pageTitle = 'Edit Product';
+        $Products = Product::find($id);
+        return view('admin.editproduct', [
+        'pageTitle' => $pageTitle,
+        'Products' => $Products
+    ]);
     }
 
     /**
@@ -98,7 +103,44 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id )
     {
+        $messages = [
+            'required' => ':harus diisi.',
+            'unic' => 'Isi :attribute dengan format yang benar',
+            'numeric' => 'Isi :attribute dengan angka',
+        ];
 
+        $validator = Validator::make($request->all(), [
+            'Nama_Product' => 'required',
+            'Code' => 'required',
+            'Deskripsi' => 'required',
+            'Harga' => 'required|numeric',
+            'Stock' => 'required|numeric',
+        ], $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $Product = Product::find($id);
+        $file = $request->file('imgproduct');
+        if ($file == null) {
+            $originalimagename = $Product->original_imagename;
+            $encryptedimagename = $Product->encrypted_imagename;
+        }
+        elseif($file != null) {
+            $originalimagename = $file->getClientOriginalName();
+            $encryptedimagename = $file->hashName();
+            $file->store('public/files/img');
+        }
+        $Product->code_product = $request->Code;
+        $Product->name_product = $request->Nama_Product;
+        $Product->harga = $request->Harga;
+        $Product->stock = $request->Stock;
+        $Product->deskripsi = $request->Deskripsi;
+        $Product->original_imagename = $originalimagename;
+        $Product->encrypted_imagename = $encryptedimagename;
+        $Product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -112,5 +154,17 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
+    public function getDataproduct(Request $request)
+        {
+            $listproduct = Product::all();
+            if ($request->ajax()) {
+                return datatables()->of($listproduct)
+                    ->addIndexColumn()
+                    ->addColumn('menuadmin', function($listproduct) {
+                        return view('layouts.menuadmin', compact('listproduct'));
+                    })
+                    ->toJson();
+            }
+        }
 
 }

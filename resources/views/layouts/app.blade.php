@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $pageTitle }}</title>
     @vite('resources/sass/app.scss')
+    <link rel="icon" type="image/x-icon" href="{{ Vite::asset('resources/images/iconL.svg') }}">
 </head>
 <body>
     @include('layouts.nav')

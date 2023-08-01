@@ -4,7 +4,7 @@
 <div class="container-md d-flex justify-content-center mt-5">
     <div class="border border-4 border-black p-5 rounded shadow">
         <div class="d-flex justify-content-center ">
-            <img class="img-fluid me-4" src="{{ Vite::asset('resources/images/undraw_winter_designer_a-2-m7(1) 1.svg') }}" alt="" style="width: 500px;">
+            <img class="img-fluid me-4" src="{{ Vite::asset('public/storage/files/img/'.$Products->encrypted_imagename) }}" alt="" style="max-width: 500px; max-height: 500px;">
             <div>
                 <p class="h3 fw-medium text-center mt-0 text-capitalize">{{ $Products->name_product }}</p>
                 <p class="h5 fw-light mb-0 text-capitalize">Harga</p>

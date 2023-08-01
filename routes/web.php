@@ -11,6 +11,8 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\BayarController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginadminController;
+use App\Http\Controllers\DatapembayaranController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,7 @@ use App\Http\Controllers\LoginadminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::resource('product', ProductController::class)->middleware('auth:admins');
+Route::resource('databayar', DatapembayaranController::class)->middleware('auth:admins');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::get('/catalog', [CatalogController::class, 'catalog'])->name('catalog');
@@ -36,3 +39,15 @@ Route::get('/admin', [AdminController::class, 'admin'])->name('admin');
 Route::post('/loginadmin', [LoginadminController::class, 'login'])->name('loginadmin');
 Route::get('/homeadmin', [AdminController::class, 'homeadmin'])->name('homeadmin')->middleware('auth:admins');
 Route::post('/logoutadmin', [LoginadminController::class, 'logout'])->name('logoutadmin');
+Route::put('/uplodbukti/{id}', [BayarController::class, 'uplodbukti'])->name('uplodbukti')->middleware('auth');
+Route::get('/history2/{id}', [HistoryController::class, 'history2'])->name('history2')->middleware('auth');
+Route::get('/history3/{id}', [HistoryController::class, 'history3'])->name('history3')->middleware('auth');
+Route::get('/getpembayaran', [DatapembayaranController::class, 'getData'])->name('databayar.getData');
+Route::get('/getprodut', [ProductController::class, 'getDataproduct'])->name('product.getDataproduct');
+Route::resource('users', UserController::class)->middleware('auth:admins');
+Route::get('/getusers', [UserController::class, 'getDatauser'])->name('users.getDatauser');
+Route::get('/getpembayaranex', [DatapembayaranController::class, 'exgetData'])->name('databayar.exgetData')->middleware('auth:admins');
+Route::get('/listpembayaranex', [DatapembayaranController::class, 'exindex'])->name('databayar.exindex')->middleware('auth:admins');
+Route::delete('/destroyex/{id}', [DatapembayaranController::class, 'exdestroy'])->name('databayar.exdestroy')->middleware('auth:admins');
+Route::get('/getpembayaranse', [DatapembayaranController::class, 'segetData'])->name('databayar.segetData')->middleware('auth:admins');
+Route::get('/listpembayaranse', [DatapembayaranController::class, 'seindex'])->name('databayar.seindex')->middleware('auth:admins');

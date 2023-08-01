@@ -13,6 +13,7 @@ class PembayaranController extends Controller
 {
     public function pembayaran(Request $request, string $id)
     {
+        $Products = Product::find($id);
         $messages = [
             'required' => ':Attribute harus diisi.',
             'unic' => 'Isi :attribute dengan format yang benar',
@@ -29,20 +30,25 @@ class PembayaranController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-
+        $phg = $Products->harga;
+        $iuser = $request->iduser;
+        $harga = $request->jumlah * $phg;
+        $stock = $Products->stock - $request->jumlah;
+        $Products->stock = $stock;
+        $Products->save();
         $pembelian = New Pembayaran;
         $pembelian->nama_penerima = $request->nama_penerima;
         $pembelian->alamat = $request->alamat;
         $pembelian->no_hp = $request->no;
         $pembelian->jumlah = $request->jumlah;
-        $pembelian->metode = $request->metode;
+        $pembelian->biaya = $harga;
+        $pembelian->metode_id = $request->metode;
         $pembelian->statuse_id = 1;
-        $pembelian->user_id = $request->iduser;
+        $pembelian->user_id = $iuser;
         $pembelian->product_id = $id;
         $pembelian->save();
 
-        return redirect()->route('history', [$id]);
+        return redirect()->route('history', [$iuser]);
 
 
     }

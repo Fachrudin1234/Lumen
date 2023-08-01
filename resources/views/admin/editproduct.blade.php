@@ -4,18 +4,19 @@
     <div class="border border-4 border-black p-4 rounded shadow">
         <div class="d-flex justify-content-center ">
             <div class="me-4 d-flex align-items-center" style="min-width: 500px; min-height: 400px;">
-                <img id="frame" src="" class="img-fluid rounded" style="max-width: 500px; max-height: 500px;" />
+                <img id="frame" src="{{ Vite::asset('public/storage/files/img/'.$Products->encrypted_imagename) }}" class="img-fluid rounded" style="max-width: 500px; max-height: 500px;" />
             </div>
             <div class="mt-4">
-                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('product.update',[$Products->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <p class="h2 fw-bold text-center mb-3">Tambah Product</p>
+                    @method('put')
+                    <p class="h2 fw-bold text-center mb-3">Edit Product</p>
                     <div class="justify-content-center d-flex">
                         <div class="me-4">
                             <div class="mb-3">
                                 <label for="Nama_Product" class="form-label">Nama Product</label>
                                 <input type="text" class="form-control" id="Nama_Product" name="Nama_Product"
-                                    value="{{ old('Nama_Product') }}">
+                                    value="{{$Products->name_product}}">
                                 @error('Nama_Product')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                                 @enderror
@@ -23,7 +24,7 @@
                             <div class="mb-3">
                                 <label for="Harga" class="form-label">Harga</label>
                                 <input type="text" class="form-control" id="Harga" name="Harga"
-                                    value="{{ old('Harga') }}">
+                                    value="{{$Products->harga}}">
                                 @error('Harga')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                                 @enderror
@@ -32,8 +33,7 @@
                         <div>
                             <div class="mb-3">
                                 <label for="Code" class="form-label">Code Product</label>
-                                <input type="text" class="form-control" id="Code" name="Code"
-                                    value="{{ old('Code') }}">
+                                <input type="text" class="form-control" id="Code" name="Code" value="{{$Products->code_product}}">
                                 @error('Code')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                                 @enderror
@@ -41,7 +41,7 @@
                             <div class="mb-3">
                                 <label for="Stock" class="form-label">Stock</label>
                                 <input type="text" class="form-control" id="Stock" name="Stock"
-                                    value="{{ old('Stock') }}">
+                                    value="{{$Products->stock}}">
                                 @error('Stock')
                                 <div class="text-danger"><small>{{ $message }}</small></div>
                                 @enderror
@@ -51,17 +51,16 @@
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Deskripsi</label>
                         <textarea class="form-control fw-medium text-decoration-none bg-white "
-                            id="exampleFormControlTextarea1" rows="4"
-                            style="width:450px;
-                            resize:none;" id="Deskripsi" name="Deskripsi" ></textarea>
+                            id="exampleFormControlTextarea1" rows="4" style="width:450px;
+                            resize:none;" id="Deskripsi" name="Deskripsi">{{$Products->deskripsi}}</textarea>
                         @error('Deskripsi')
                         <div class="text-danger"><small>{{ $message }}</small></div>
                         @enderror
                     </div>
-                    <label for="Image" class="form-label">image Product</label>
+                    <label for="Image" class="form-label">{{$Products->original_imagename}}</label>
                     <input class="form-control" type="file" id="formFile" onchange="preview()" name="imgproduct">
                     <div class="d-flex justify-content-center mb-3 mt-4">
-                        <button type="submit" class="btn btn-primary px-5">Tambah Product</button>
+                        <button type="submit" class="btn btn-primary px-5">Edit data Product</button>
                     </div>
                 </form>
             </div>

@@ -19,9 +19,14 @@ class Pembayaran extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function Status()
+    public function Statuse()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Statuse::class);
+    }
+
+    public function Metode()
+    {
+        return $this->belongsTo(Metode::class);
     }
 
 }

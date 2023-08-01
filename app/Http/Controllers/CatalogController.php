@@ -13,7 +13,7 @@ class CatalogController extends Controller
     public function catalog()
     {
         $pageTitle = 'Product';
-        $Products = Product::all();
+        $Products = Product::where("stock",">", '1')->get();
         return view('product', [
         'pageTitle' => $pageTitle,
         'Products' => $Products

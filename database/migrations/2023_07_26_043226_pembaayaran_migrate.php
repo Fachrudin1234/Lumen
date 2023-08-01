@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('alamat');
             $table->integer('no_hp');
             $table->integer('jumlah');
-            $table->string('metode');
+            $table->integer('biaya');
+            $table->string('original_buktiimage')->nullable();
+            $table->string('encrypted_buktiimage')->nullable();
+            $table->foreignId('metode_id')->constrained();
             $table->foreignId('statuse_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('user_id')->constrained();

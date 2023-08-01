@@ -17,27 +17,18 @@
                         <i class="bi bi-download me-1"></i> to PDF
                     </a>
                 </li>
-                <li class="list-inline-item">|</li>
-                <li class="list-inline-item">
-                    <a href="{{ route('product.create')}}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-1"></i> Tambah Produk
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
     <hr>
     <div class="table-responsive border p-3 rounded-3">
-        <table class="table table-bordered table-hover table-striped mb-0 bg-white datatable" id="produtTB">
+        <table class="table table-bordered table-hover table-striped mb-0 bg-white datatable" id="listuser">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>No.</th>
-                    <th>Code</th>
-                    <th>Name Barang</th>
-                    <th>Harga</th>
-                    <th>Stok</th>
-                    <th>Deskripsi</th>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Email</th>
                     <th></th>
                 </tr>
             </thead>
