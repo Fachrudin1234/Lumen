@@ -8,6 +8,7 @@ use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PembayaranController extends Controller
 {
@@ -47,6 +48,8 @@ class PembayaranController extends Controller
         $pembelian->user_id = $iuser;
         $pembelian->product_id = $id;
         $pembelian->save();
+
+        Alert::success('Pembelian Berhasil', 'Silahkan lanjutkan Pembayaran');
 
         return redirect()->route('history', [$iuser]);
 

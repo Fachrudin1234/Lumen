@@ -6,7 +6,7 @@
         <form action="{{ route('product.destroy', [$listproduct->id]) }}" method="POST">
             @csrf
             @method('delete')
-            <button type="submit" class="btn btn-outline-dark btn-sm me-2"><i class="bi-trash"></i></button>
+            <button type="submit" class="btn btn-outline-dark btn-sm me-2 btn-delete" data-name="{{ $listproduct->nama_product.' '.$listproduct->code_product }}"><i class="bi-trash"></i></button>
         </form>
     </div>
 </div>

@@ -15,9 +15,6 @@ $currentRouteName = Route::currentRouteName();
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('catalog') }}">Produk</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Tentang Kami</a>
-                </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 <!-- Authentication Links -->
@@ -43,12 +40,12 @@ $currentRouteName = Route::currentRouteName();
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('history',[Auth::user()->id]) }}">
+                            {{ __('History') }}
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
-                        </a>
-                        <a class="dropdown-item" href="{{ route('history',[Auth::user()->id]) }}">
-                            {{ __('history') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf

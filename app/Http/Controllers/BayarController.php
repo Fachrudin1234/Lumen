@@ -9,6 +9,7 @@ use App\Models\Status;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BayarController extends Controller
 {
@@ -52,7 +53,7 @@ class BayarController extends Controller
         $bayar->original_buktiimage = $originalFilename;
         $bayar->encrypted_buktiimage = $encryptedFilename;
         $bayar->save();
-
+        Alert::success('Berhasil', 'Upload Bukti Pembayaran Berhasil.');
         return redirect()->route('history2', [$iuser]);
     }
 

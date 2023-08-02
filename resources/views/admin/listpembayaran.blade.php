@@ -8,17 +8,6 @@
         <div class="col-lg-3 col-xl-6">
             <ul class="list-inline mb-0 float-end">
                 <li class="list-inline-item">
-                    <a href="{{-- route('employees.exportExcel') --}}" class="btn btn-outline-success">
-                        <i class="bi bi-download me-1"></i> to Excel
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a href="{{-- route('employees.exportPdf') --}}" class="btn btn-outline-danger">
-                        <i class="bi bi-download me-1"></i> to PDF
-                    </a>
-                </li>
-                <li class="list-inline-item">|</li>
-                <li class="list-inline-item">
                     <a href="{{ route('databayar.exindex') }}" class="btn btn-primary">
                         <i class="bi bi-check"></i> Cek Expired Trasaksi
                     </a>

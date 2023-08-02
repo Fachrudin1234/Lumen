@@ -9,6 +9,10 @@ use App\Models\Statuse;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DatapembayarExport;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DatapembayaranController extends Controller
 {
@@ -68,6 +72,7 @@ class DatapembayaranController extends Controller
         $bayar= Pembayaran::find($id);
         $bayar->statuse_id = $request->status;
         $bayar->save();
+        Alert::success('Verifikasi Berhasil', 'Bukti Pembayaran Telah di verifikasi');
         return redirect()->route('databayar.index');
     }
 
@@ -85,6 +90,7 @@ class DatapembayaranController extends Controller
         else{
             $bayar->delete();
         }
+        Alert::success('Deleted Berhasil', 'Data Pembayaran telah terhapus');
         return redirect()->route('databayar.index');
     }
 
@@ -152,4 +158,18 @@ class DatapembayaranController extends Controller
                     ->toJson();
             }
         }
+
+    public function exportPdfbayar()
+    {
+        $bayar = Pembayaran::where('statuse_id', '3')->get();
+
+        $pdf = PDF::loadView('admin.p_pdf', compact('bayar'));
+
+        return $pdf->download('databayar.pdf');
+    }
+
+    public function exportEcelDatapembayar()
+    {
+        return Excel::download(new DatapembayarExport, 'Datapembayar.xlsx');
+    }
 }

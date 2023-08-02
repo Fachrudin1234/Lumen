@@ -15,6 +15,7 @@
     @include('layouts.admin_nav')
     @yield('admin_content')
     @vite('resources/js/app.js')
+    @include('sweetalert::alert')
     @stack('scripts')
 </body>
 

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductExport;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ProductController extends Controller
 {
     /**
@@ -73,7 +78,7 @@ class ProductController extends Controller
         $Product->original_imagename = $originalimagename;
         $Product->encrypted_imagename = $encryptedimagename;
         $Product->save();
-
+        Alert::success('Berhasil di Tambahkan', 'Product Telah di Tambahkan Ke Catalog');
         return redirect()->route('product.index');
     }
 
@@ -139,7 +144,7 @@ class ProductController extends Controller
         $Product->original_imagename = $originalimagename;
         $Product->encrypted_imagename = $encryptedimagename;
         $Product->save();
-
+        Alert::success('Berhasil', 'Data Product Telah di ubah');
         return redirect()->route('product.index');
     }
 
@@ -151,6 +156,7 @@ class ProductController extends Controller
         $Product = Product::find($id);
         Storage::delete('public/files/img/' . $Product->encrypted_imagename);
         $Product->delete();
+        Alert::success('Deleted Berhasil', 'Product telah terhapus');
         return redirect()->route('product.index');
     }
 
@@ -166,5 +172,19 @@ class ProductController extends Controller
                     ->toJson();
             }
         }
+
+    public function exportPdfproduct()
+    {
+        $Product = Product::all();
+
+        $pdf = PDF::loadView('admin.product_pdf', compact('Product'));
+
+        return $pdf->download('product.pdf');
+    }
+
+    public function exportEcelproduct()
+    {
+        return Excel::download(new ProductExport, 'Product.xlsx');
+    }
 
 }

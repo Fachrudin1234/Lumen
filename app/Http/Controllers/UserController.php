@@ -7,6 +7,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class UserController extends Controller
 {
     /**
@@ -62,11 +67,12 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        $user = User::find($id);
-        $user->delete();
-        return redirect()->route('users.index');
-    }
+        {
+            $user = User::find($id);
+            $user->delete();
+            Alert::success('Deleted Berhasil', 'User telah terhapus');
+            return redirect()->route('users.index');
+        }
 
     public function getDatauser(Request $request)
         {
@@ -79,5 +85,19 @@ class UserController extends Controller
                     })
                     ->toJson();
             }
+        }
+
+    public function exportPdfuser()
+        {
+            $user = User::all();
+
+            $pdf = PDF::loadView('admin.user_pdf', compact('user'));
+
+            return $pdf->download('user.pdf');
+        }
+
+    public function exportEceluser()
+        {
+            return Excel::download(new UserExport, 'User.xlsx');
         }
 }

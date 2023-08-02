@@ -51,3 +51,9 @@ Route::get('/listpembayaranex', [DatapembayaranController::class, 'exindex'])->n
 Route::delete('/destroyex/{id}', [DatapembayaranController::class, 'exdestroy'])->name('databayar.exdestroy')->middleware('auth:admins');
 Route::get('/getpembayaranse', [DatapembayaranController::class, 'segetData'])->name('databayar.segetData')->middleware('auth:admins');
 Route::get('/listpembayaranse', [DatapembayaranController::class, 'seindex'])->name('databayar.seindex')->middleware('auth:admins');
+Route::get('exportPdfproduct', [ProductController::class, 'exportPdfproduct'])->name('product.exportPdf')->middleware('auth:admins');
+Route::get('exportPdfuser', [UserController::class, 'exportPdfuser'])->name('user.exportPdf')->middleware('auth:admins');
+Route::get('exportPdfbayar', [DatapembayaranController::class, 'exportPdfbayar'])->name('databayar.exportPdf')->middleware('auth:admins');
+Route::get('exportEcelproduct', [ProductController::class, 'exportEcelproduct'])->name('product.exportEcel')->middleware('auth:admins');
+Route::get('exportEcelDatapembayar', [DatapembayaranController::class, 'exportEcelDatapembayar'])->name('databayar.exportEcel')->middleware('auth:admins');
+Route::get('exportEceluser', [UserController::class, 'exportEceluser'])->name('user.exportEcel')->middleware('auth:admins');
